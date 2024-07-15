@@ -39,6 +39,10 @@ public class EventMonitoring {
     private Manager idManager;
     @Column(name = "operator_notes")
     private String operatorNotes;
-    private Date date;
-    private Time time;
+    @Column(name = "date_mon")
+    private Date dateMon;
+    @Column(name = "time_mon")
+    private Time timeMon;
+    @Column(name="approval_status")
+    private String approvalStatus;
 }

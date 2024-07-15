@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "backup_app_monitoring")
+@Table(name = "backup_db_monitoring")
 public class BackupDbMonitoring {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
