@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DivisiRequest {
-    private String divisiName;
+public class ResponseMessage {
+    private String message;
 }
