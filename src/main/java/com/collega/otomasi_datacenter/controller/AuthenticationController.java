@@ -25,7 +25,7 @@ public class AuthenticationController {
         try {
             return ResponseEntity.ok(authenticationService.authenticate(authenticationRequest));
         } catch (RuntimeException e) {
-            return ResponseEntity.status(401).contentType(MediaType.APPLICATION_JSON).body(new ErrorResponse(e.getMessage()));
+            return ResponseEntity.status(401).body(new ErrorResponse(e.getMessage()));
         }
 
     }
@@ -35,7 +35,7 @@ public class AuthenticationController {
         try {
             return ResponseEntity.ok(handleRegistration(request));
         }catch (RuntimeException e) {
-            return ResponseEntity.status(401).contentType(MediaType.APPLICATION_JSON).body(new ErrorResponse(e.getMessage()));
+            return ResponseEntity.status(401).body(new ErrorResponse(e.getMessage()));
         }
     }
     

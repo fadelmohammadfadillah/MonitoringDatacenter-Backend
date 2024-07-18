@@ -45,7 +45,7 @@ public class DivisiService {
             Divisi divisi = optDivisi.get();
             divisi.setDivisiName(request.getDivisiName());
             divisiRepository.save(divisi);
-            return "Data divisi berhasil di update!";
+            return "Data perubahan divisi berhasil disimpan!";
         } catch (RuntimeException e) {
             // TODO: handle exception
             throw new RuntimeException("Data divisi tidak ditemukan!");
@@ -61,6 +61,7 @@ public class DivisiService {
         } catch (DataIntegrityViolationException e){
             String department = getDepartmentByIdDivisi(id);
             throw new DataIntegrityViolationException("Constraint foreign key, List Department: " + department);
+            // user divisi di null id nya dulu
         } 
         catch (RuntimeException e) {
             throw new RuntimeException("Data divisi tidak ditemukan");
