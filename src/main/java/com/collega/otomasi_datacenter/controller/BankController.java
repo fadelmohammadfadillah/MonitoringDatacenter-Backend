@@ -10,48 +10,48 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.collega.otomasi_datacenter.exception.ErrorResponse;
-import com.collega.otomasi_datacenter.service.DepartmentService;
-import com.collega.otomasi_datacenter.vo.DepartmentRequest;
+import com.collega.otomasi_datacenter.model.Bank;
+import com.collega.otomasi_datacenter.service.BankService;
 import com.collega.otomasi_datacenter.vo.ResponseMessage;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-public class DepartmentController {
-    private final DepartmentService departmentService;
+public class BankController {
+    private final BankService bankService;
 
-    @PostMapping("/api/super-admin/dept/create")
-    public ResponseEntity<?> createDepartment(@RequestBody DepartmentRequest request) {
+    @PostMapping("/api/super-admin/bank/create")
+    public ResponseEntity<?> createBank(@RequestBody Bank request) {
         try {
-            return ResponseEntity.ok(new ResponseMessage(departmentService.createDepartment(request)));
+            return ResponseEntity.ok(new ResponseMessage(bankService.createBank(request)));
         } catch (RuntimeException e) {
             return ResponseEntity.status(401).body(new ErrorResponse(e.getMessage()));
         }
     }
 
-    @PutMapping("/api/super-admin/dept/update/{id}")
-    public ResponseEntity<?> updateDepartment(@PathVariable Integer id, @RequestBody DepartmentRequest request) {
+    @PutMapping("/api/super-admin/bank/update/{id}")
+    public ResponseEntity<?> updateBank(@PathVariable Integer id, @RequestBody Bank request) {
         try {
-            return ResponseEntity.ok(new ResponseMessage(departmentService.updateDepartment(id, request)));
+            return ResponseEntity.ok(new ResponseMessage(bankService.updateBank(id, request)));
         } catch (RuntimeException e) {
             return ResponseEntity.status(401).body(new ErrorResponse(e.getMessage()));
         }
     }
 
-    @DeleteMapping("/api/super-admin/dept/delete/{id}")
-    public ResponseEntity<?> deleteDepartment(@PathVariable Integer id) {
+    @DeleteMapping("/api/super-admin/bank/delete/{id}")
+    public ResponseEntity<?> deleteBank(@PathVariable Integer id) {
         try {
-            return ResponseEntity.ok(new ResponseMessage(departmentService.deleteDepartment(id)));
+            return ResponseEntity.ok(new ResponseMessage(bankService.deleteBank(id)));
         } catch (RuntimeException e) {
             return ResponseEntity.status(401).body(new ErrorResponse(e.getMessage()));
         }
     }
-
-    @GetMapping("/api/super-admin/dept/get-all-dept")
-    public ResponseEntity<?> getAllDepartment() {
+        
+    @GetMapping("/api/super-admin/bank/get-all-bank")
+    public ResponseEntity<?> getAllBanks() {
         try {
-            return ResponseEntity.ok(departmentService.getAllDepartments());
+            return ResponseEntity.ok(bankService.getAllBanks());
         } catch (RuntimeException e) {
             return ResponseEntity.status(401).body(new ErrorResponse(e.getMessage()));
         }

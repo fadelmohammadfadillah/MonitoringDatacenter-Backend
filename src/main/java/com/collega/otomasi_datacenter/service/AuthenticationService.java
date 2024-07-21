@@ -46,7 +46,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final CustomUserDetailService userDetailService;
 
-    public AuthenticationResponse registerOperator(RegisterRequest request){
+    public String registerOperator(RegisterRequest request){
         try {
             var operator = Operator.builder()
                 .name(request.getName())
@@ -54,15 +54,14 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
             operatorRepository.save(operator);
-            var jwtToken = jwtUtil.generateToken(operator);
-            return AuthenticationResponse.builder().jwtToken(jwtToken).build();
+            return "Registrasi Operator berhasil!";
         } catch (DataIntegrityViolationException e) {
             // System.out.println("username telah terpakai!");
             throw new RuntimeException("Username tersebut sudah terpakai!", e);
         }
     }
 
-    public AuthenticationResponse registerManager(RegisterRequest request){
+    public String registerManager(RegisterRequest request){
         try {
             var manager = Manager.builder()
                 .name(request.getName())
@@ -70,15 +69,14 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
             managerRepository.save(manager);
-            var jwtToken = jwtUtil.generateToken(manager);
-            return AuthenticationResponse.builder().jwtToken(jwtToken).build();
+            return "Registrasi Manager berhasil!";
         } catch (DataIntegrityViolationException e) {
             // System.out.println("username telah terpakai!");
             throw new RuntimeException("Username tersebut sudah terpakai!", e);
         }
     }
 
-    public AuthenticationResponse registerSupervisor(RegisterRequest request){
+    public String registerSupervisor(RegisterRequest request){
         try {
             var supervisor = Supervisor.builder()
                 .name(request.getName())
@@ -86,15 +84,14 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
             supervisorRepository.save(supervisor);
-            var jwtToken = jwtUtil.generateToken(supervisor);
-            return AuthenticationResponse.builder().jwtToken(jwtToken).build();
+            return "Registrasi Supervisor berhasil!";
         } catch (DataIntegrityViolationException e) {
             // System.out.println("username telah terpakai!");
             throw new RuntimeException("Username tersebut sudah terpakai!", e);
         }
     }
 
-    public AuthenticationResponse registerUserDiv(RegisterRequest request){
+    public String registerUserDiv(RegisterRequest request){
         try {
             Divisi divisi = divisiRepository.findById(request.getIdDivisi())
             .orElseThrow(() -> new RuntimeException("Divisi dengan kode " + request.getIdDivisi()+ " tidak tersedia!"));
@@ -105,15 +102,14 @@ public class AuthenticationService {
                 .idDivisi(divisi)
                 .build();
             userDivRepository.save(userDiv);
-            var jwtToken = jwtUtil.generateToken(userDiv);
-            return AuthenticationResponse.builder().jwtToken(jwtToken).build();
+            return "Registrasi User Divisi berhasil!";
         } catch (DataIntegrityViolationException e) {
             // System.out.println("username telah terpakai!");
             throw new RuntimeException("Username tersebut sudah terpakai!", e);
         }
     }
 
-    public AuthenticationResponse registerUserDept(RegisterRequest request){
+    public String registerUserDept(RegisterRequest request){
         try {
             Department deparment = departmentRepository.findById(request.getIdDepartment())
                 .orElseThrow(() -> new RuntimeException("Divisi dengan kode " + request.getIdDepartment()+ " tidak tersedia!"));
@@ -124,8 +120,7 @@ public class AuthenticationService {
                 .idDepartment(deparment)
                 .build();
             userDeptRepository.save(userDept);
-            var jwtToken = jwtUtil.generateToken(userDept);
-            return AuthenticationResponse.builder().jwtToken(jwtToken).build();
+            return "Registrasi User Department berhasil!";
         } catch (DataIntegrityViolationException e) {
             // System.out.println("username telah terpakai!");
             throw new RuntimeException("Username tersebut sudah terpakai!", e);

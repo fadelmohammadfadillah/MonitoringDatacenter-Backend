@@ -23,6 +23,6 @@ public class Bank {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_BANK")
     private Integer idBank;
-    @Column(name="BANK_NAME")
+    @Column(name="BANK_NAME", unique = true)
     private String bankName;
 }

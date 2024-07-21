@@ -1,6 +1,5 @@
 package com.collega.otomasi_datacenter.controller;
 
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +29,7 @@ public class AuthenticationController {
 
     }
 
-    @PostMapping("/api/auth/register")
+    @PostMapping("/api/super-admin/register")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequest request) {
         try {
             return ResponseEntity.ok(handleRegistration(request));

@@ -2,7 +2,6 @@ package com.collega.otomasi_datacenter.service;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -41,21 +40,21 @@ public class DivisiService {
 
     public String updateDivisi(Integer id, Divisi request){
         try {
-            Optional<Divisi> optDivisi = divisiRepository.findById(id);
-            Divisi divisi = optDivisi.get();
-            divisi.setDivisiName(request.getDivisiName());
+            Divisi divisi = divisiRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Data divisi tidak ditemukan!"));
+            divisi.setDivisiName(request.getDivisiName().toUpperCase());
             divisiRepository.save(divisi);
             return "Data perubahan divisi berhasil disimpan!";
         } catch (RuntimeException e) {
             // TODO: handle exception
-            throw new RuntimeException("Data divisi tidak ditemukan!");
+            throw new RuntimeException("Data divisi tidak ditemukan!" + e.getMessage());
         }
     }
 
     public String deleteDivisi(Integer id){
         try {
-            Optional<Divisi> optDivisi = divisiRepository.findById(id);
-            Divisi divisi = optDivisi.get();
+            Divisi divisi = divisiRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Data divisi tidak ditemukan!"));
             divisiRepository.delete(divisi);
             return "Data divisi berhasil di hapus!";
         } catch (DataIntegrityViolationException e){
@@ -64,35 +63,25 @@ public class DivisiService {
             // user divisi di null id nya dulu
         } 
         catch (RuntimeException e) {
-            throw new RuntimeException("Data divisi tidak ditemukan");
+            throw new RuntimeException("Data divisi tidak ditemukan" + e.getMessage());
         }
     }
 
     public String getDepartmentByIdDivisi(Integer id){
-        Optional<Divisi> divisi = divisiRepository.findById(id);
-        if(divisi.isPresent()){
-            String[] departments = departmentRepository.findByIdDivisi(divisi.get())
+        try {
+            Divisi divisi = divisiRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Data divisi tidak ditemukan!"));
+            String[] departments = departmentRepository.findByIdDivisi(divisi)
                                     .stream().map(Department::getDepartmentName)
                                     .toArray(String[]::new);
             return Arrays.toString(departments);
-        }else{
+        } catch (Exception e) {
             throw new RuntimeException("Nama divisi tidak ditemukan!");
         }
     }
 
     public List<Divisi> getAllDivisi(){
         return divisiRepository.findAll();
-    }
-
-    public List<UserDivisi> findByDivisiName(String divisiName){
-        // format divisi menjadi uppercase agar menghindari error
-        divisiName = divisiName.toUpperCase();
-        Optional<Divisi> divisi = divisiRepository.findByDivisiName(divisiName);
-        if(divisi.isPresent()){
-            return userDivRepository.findByIdDivisi(divisi.get());
-        }else{
-            throw new RuntimeException("Nama divisi tidak ditemukan!");
-        }
     }
 
     public List<UserDivisi> getAllUserDivisi(){

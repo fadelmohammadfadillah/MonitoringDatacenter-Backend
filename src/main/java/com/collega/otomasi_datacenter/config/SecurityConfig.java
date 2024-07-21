@@ -20,10 +20,13 @@ import com.collega.otomasi_datacenter.service.CustomUserDetailService;
 public class SecurityConfig {
     private final JwtRequestFilter jwtRequestFilter;
     private final CustomUserDetailService customUserDetailService;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
-    public SecurityConfig(JwtRequestFilter jwtRequestFilter, CustomUserDetailService customUserDetailService){
+    public SecurityConfig(JwtRequestFilter jwtRequestFilter, CustomUserDetailService customUserDetailService, 
+        CustomAccessDeniedHandler customAccessDeniedHandler){
         this.jwtRequestFilter = jwtRequestFilter;
         this.customUserDetailService = customUserDetailService;
+        this.customAccessDeniedHandler = customAccessDeniedHandler;
     }
 
     @Bean
@@ -43,7 +46,7 @@ public class SecurityConfig {
             )
             .sessionManagement((session) ->
                 session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            );
+            ).exceptionHandling(exception -> exception.accessDeniedHandler(customAccessDeniedHandler));
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

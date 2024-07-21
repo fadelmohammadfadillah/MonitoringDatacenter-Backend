@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DepartmentRequest {
-    private Integer idDepartment;
-    private Integer idDivisi;
-    private String departmentName;
-    private String divisiName;
+public class ModuleRequest {
+    private Integer idModule;
+    private String moduleName;
+    private String profile;
+    private Integer idSubproduct;
+    private String subproductName;
 }

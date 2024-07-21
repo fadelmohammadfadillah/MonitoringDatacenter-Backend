@@ -10,48 +10,48 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.collega.otomasi_datacenter.exception.ErrorResponse;
-import com.collega.otomasi_datacenter.service.DepartmentService;
-import com.collega.otomasi_datacenter.vo.DepartmentRequest;
+import com.collega.otomasi_datacenter.service.ProductService;
+import com.collega.otomasi_datacenter.vo.ProductRequest;
 import com.collega.otomasi_datacenter.vo.ResponseMessage;
 
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-public class DepartmentController {
-    private final DepartmentService departmentService;
+public class ProductController {
+    private final ProductService productService;
 
-    @PostMapping("/api/super-admin/dept/create")
-    public ResponseEntity<?> createDepartment(@RequestBody DepartmentRequest request) {
+    @PostMapping("/api/super-admin/product/create")
+    public ResponseEntity<?> createProduct(@RequestBody ProductRequest request) {
         try {
-            return ResponseEntity.ok(new ResponseMessage(departmentService.createDepartment(request)));
+            return ResponseEntity.ok(new ResponseMessage(productService.createProduct(request)));
         } catch (RuntimeException e) {
             return ResponseEntity.status(401).body(new ErrorResponse(e.getMessage()));
         }
     }
 
-    @PutMapping("/api/super-admin/dept/update/{id}")
-    public ResponseEntity<?> updateDepartment(@PathVariable Integer id, @RequestBody DepartmentRequest request) {
+    @PutMapping("/api/super-admin/product/update/{id}")
+    public ResponseEntity<?> updateProduct(@PathVariable Integer id, @RequestBody ProductRequest request) {
         try {
-            return ResponseEntity.ok(new ResponseMessage(departmentService.updateDepartment(id, request)));
+            return ResponseEntity.ok(new ResponseMessage(productService.updateProduct(id, request)));
         } catch (RuntimeException e) {
             return ResponseEntity.status(401).body(new ErrorResponse(e.getMessage()));
         }
     }
 
-    @DeleteMapping("/api/super-admin/dept/delete/{id}")
-    public ResponseEntity<?> deleteDepartment(@PathVariable Integer id) {
+    @DeleteMapping("/api/super-admin/product/delete/{id}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Integer id) {
         try {
-            return ResponseEntity.ok(new ResponseMessage(departmentService.deleteDepartment(id)));
+            return ResponseEntity.ok(new ResponseMessage(productService.deleteProduct(id)));
         } catch (RuntimeException e) {
             return ResponseEntity.status(401).body(new ErrorResponse(e.getMessage()));
         }
     }
-
-    @GetMapping("/api/super-admin/dept/get-all-dept")
-    public ResponseEntity<?> getAllDepartment() {
+        
+    @GetMapping("/api/super-admin/product/get-all-product")
+    public ResponseEntity<?> getAllProducts() {
         try {
-            return ResponseEntity.ok(departmentService.getAllDepartments());
+            return ResponseEntity.ok(productService.getAllProducts());
         } catch (RuntimeException e) {
             return ResponseEntity.status(401).body(new ErrorResponse(e.getMessage()));
         }
