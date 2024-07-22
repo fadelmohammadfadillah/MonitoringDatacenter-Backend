@@ -40,7 +40,7 @@ public class ModuleService {
         try {
             Module module = moduleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Data module tidak ditemukan!"));
-            Subproduct subproduct = subproductRepository.findById(request.getIdModule())
+            Subproduct subproduct = subproductRepository.findById(request.getIdSubproduct())
                 .orElseThrow(() -> new RuntimeException("Data subproduct tidak ditemukan!"));
             module.setModuleName(request.getModuleName().toUpperCase());
             module.setProfile(request.getProfile().toUpperCase());

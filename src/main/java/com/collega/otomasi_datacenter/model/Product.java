@@ -28,7 +28,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "id_department")
     private Department idDepartment;
-    @Column(name = "product_name")
+    @Column(name = "product_name", unique=true)
     private String productName;
     
 }
