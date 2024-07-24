@@ -3,6 +3,8 @@ package com.collega.otomasi_datacenter.model;
 import java.util.Collection;
 import java.util.List;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,6 +36,7 @@ public class UserDivisi implements UserDetails {
     
     @ManyToOne
     @JoinColumn(name = "ID_DIVISI")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Divisi idDivisi;
     private String name;
 

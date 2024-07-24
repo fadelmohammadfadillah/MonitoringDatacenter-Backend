@@ -1,5 +1,8 @@
 package com.collega.otomasi_datacenter.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,11 +27,17 @@ public class PathAppUseMonitoring {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_path_app_use_mon")
     private Integer idPathAppUseMon;
+
     @ManyToOne
     @JoinColumn(name = "id_dtl_mon")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private DetailMonitoring idDetailMonitoring;
+
     @ManyToOne
     @JoinColumn(name = "id_server_app_path")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private ServerAppPath idServerAppPath;
+
+    @Column(name = "usage")
     private Integer usage;
 }

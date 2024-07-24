@@ -3,6 +3,7 @@ package com.collega.otomasi_datacenter.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.collega.otomasi_datacenter.model.Bank;
@@ -41,7 +42,10 @@ public class BankService {
             Bank bank = bankRepository.findById(id).orElseThrow(() -> new RuntimeException("Bank tidak ditemukan!"));
             bankRepository.delete(bank);
             return "Data bank berhasil di hapus!";
-        } catch (RuntimeException e) {
+        } catch (DataIntegrityViolationException e){
+            throw new RuntimeException("Error constraint: " + e);
+        } 
+        catch (RuntimeException e) {
             throw new RuntimeException("Data bank tidak dapat ditemukan");
         }
     }

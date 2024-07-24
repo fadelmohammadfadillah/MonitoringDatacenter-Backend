@@ -2,6 +2,9 @@ package com.collega.otomasi_datacenter.model;
 
 import java.util.Set;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,11 +34,15 @@ public class Department {
     
     @ManyToOne
     @JoinColumn(name = "ID_DIVISI")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Divisi idDivisi;
 
     @Column(name = "department_name",unique = true)
     private String departmentName;
 
-    @OneToMany(mappedBy = "idDepartment", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "idDepartment", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserDepartment> userDepartment;
+
+    @OneToMany(mappedBy = "idDepartment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Product> products;
 }

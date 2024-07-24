@@ -2,6 +2,8 @@ package com.collega.otomasi_datacenter.model;
 import java.util.Collection;
 import java.util.List;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,6 +35,7 @@ public class UserDepartment implements UserDetails{
 
     @ManyToOne
     @JoinColumn(name = "ID_DEPARTMENT")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Department idDepartment;
 
     private String name;

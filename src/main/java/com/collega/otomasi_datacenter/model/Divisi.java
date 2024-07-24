@@ -30,10 +30,9 @@ public class Divisi {
     @Column(name = "DIVISI_NAME", unique = true)
     private String divisiName;
     
-    @OneToMany(mappedBy = "idDivisi", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "idDivisi", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<UserDivisi> userDivisi;
 
-    // ini error relasi divisi - deparment
-    @OneToMany(mappedBy = "idDivisi", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "idDivisi", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Department> departments;
 }

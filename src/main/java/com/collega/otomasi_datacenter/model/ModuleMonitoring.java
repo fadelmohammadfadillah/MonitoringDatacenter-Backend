@@ -1,5 +1,8 @@
 package com.collega.otomasi_datacenter.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,18 +27,31 @@ public class ModuleMonitoring {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_module_mon")
     private Integer idModuleMon;
+
     @ManyToOne
     @JoinColumn(name = "id_subproduct")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Subproduct idSubproduct;
+
     @ManyToOne
     @JoinColumn(name = "id_module")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Module idModule;
+
     @ManyToOne
     @JoinColumn(name = "id_dtl_mon")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private DetailMonitoring idDetailMonitoring;
+
+    @Column(name = "status")
     private String status;
+
     @Column(name = "operator_notes")
     private String operatorNotes;
+
+    @Column(name = "performa")
     private String performa;
+
+    @Column(name = "log")
     private String log;
 }
