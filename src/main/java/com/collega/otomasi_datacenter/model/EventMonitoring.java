@@ -45,11 +45,6 @@ public class EventMonitoring {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Supervisor idSupervisor;
 
-    @ManyToOne
-    @JoinColumn(name = "id_manager")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Manager idManager;
-
     @Column(name = "operator_notes")
     private String operatorNotes;
 
