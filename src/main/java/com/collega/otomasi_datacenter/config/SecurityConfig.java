@@ -38,10 +38,9 @@ public class SecurityConfig {
                 req.requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/api/super-admin/**").hasAuthority("SUPER_ADMIN")
                 .requestMatchers("/api/operator/**").hasAnyAuthority("OPERATOR", "SUPER_ADMIN")
-                .requestMatchers("/api/manager/**").hasAnyAuthority("MANAGER", "SUPER_ADMIN")
                 .requestMatchers("/api/supervisor/**").hasAnyAuthority("SUPERVISOR", "SUPER_ADMIN")
-                .requestMatchers("/api/user-dept/**").hasAnyAuthority("USER_DEPARTMENT", "SUPER_ADMIN")
-                .requestMatchers("/api/user-div/**").hasAnyAuthority("USER_DIVISI", "SUPER_ADMIN")
+                .requestMatchers("/api/po-dept/**").hasAnyAuthority("PO_DEPARTMENT", "SUPER_ADMIN")
+                .requestMatchers("/api/po-div/**").hasAnyAuthority("PO_DIVISI", "SUPER_ADMIN")
                 .anyRequest().authenticated()
             )
             .sessionManagement((session) ->

@@ -1,10 +1,6 @@
 package com.collega.otomasi_datacenter.model;
 
 import java.util.Set;
-
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,28 +17,33 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 @Table(name = "DEPARTMENT")
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_department")
+    @Column(name = "ID_DEPARTMENT")
     private Integer idDepartment;
     
     @ManyToOne
-    @JoinColumn(name = "ID_DIVISI")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "ID_DIVISI", nullable = false)
     private Divisi idDivisi;
 
-    @Column(name = "department_name",unique = true)
+    @Column(name = "DEPARTMENT_NAME", unique = true)
     private String departmentName;
 
     @OneToMany(mappedBy = "idDepartment", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UserDepartment> userDepartment;
+    private Set<ProductOwner> productOwners;
 
     @OneToMany(mappedBy = "idDepartment", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Product> products;
+    
+    @OneToMany(mappedBy = "idDepartment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Operator> operators;
+
+    @OneToMany(mappedBy = "idDepartment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Supervisor> supervisors;
 }

@@ -1,6 +1,4 @@
-package com.collega.otomasi_datacenter.auth;
-
-import com.collega.otomasi_datacenter.vo.UserType;
+package com.collega.otomasi_datacenter.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +13,7 @@ public class RegisterRequest {
     private String name;
     private String username;
     private String password;
-    private UserType userType;
+    private String role;
     private Integer idDepartment;
     private Integer idDivisi;
 }

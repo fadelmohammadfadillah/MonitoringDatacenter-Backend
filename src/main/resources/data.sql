@@ -21,15 +21,6 @@ INSERT INTO divisi (ID_Divisi, Divisi_Name) VALUES
 (15, 'Internal Audit & Risk Management');
 SELECT setval('divisi_id_divisi_seq', (SELECT MAX(id_divisi) FROM divisi));
 
--- #data user divisi
-INSERT INTO user_divisi (ID_Divisi, ID_User_Divisi, username, password) VALUES
-(1, 1, 'user1_div', 'password1'),
-(2, 2, 'user2_div', 'password2'),
-(3, 3, 'user3_div', 'password3'),
-(4, 4, 'user4_div', 'password4'),
-(5, 5, 'user5_div', 'password5');
-SELECT setval('user_divisi_id_user_divisi_seq', (SELECT MAX(ID_User_Divisi) FROM user_divisi));
-
 -- #data department
 INSERT INTO department (ID_Department, Department_Name, ID_DIVISI) VALUES
 (1, 'Sales & Business Development', 1),
@@ -57,15 +48,13 @@ INSERT INTO department (ID_Department, Department_Name, ID_DIVISI) VALUES
 (23, 'Information Security & Risk Management', 15);
 SELECT setval('department_id_department_seq', (SELECT MAX(ID_Department) FROM department));
 
--- #data user department
-INSERT INTO user_department (ID_Department, ID_User_Department, username, password) VALUES
-(1, 1, 'user1_dept', 'password1'),
-(2, 2, 'user2_dept', 'password2'),
-(3, 3, 'user3_dept', 'password3'),
-(4, 4, 'user4_dept', 'password4'),
-(5, 5, 'user5_dept', 'password5');
-SELECT setval('user_department_id_user_department_seq', (SELECT MAX(ID_User_Department) FROM user_department));
-
+-- #DATA PO DEPARTMENT
+INSERT INTO product_owner (ID_PO, NAME, USERNAME, PASSWORD, ID_DIVISI, ID_DEPARTMENT) VALUES
+(1, 'PO DEPT CDT', 'podeptcdt', '12345678', 1, 1);
+-- #DATA PO DIVISI
+INSERT INTO product_owner (ID_PO, NAME, USERNAME, PASSWORD, ID_DIVISI) VALUES
+(2, 'PO DIV DE', 'podivde', '12345678', 2);
+SELECT setval('product_owner_id_po_seq', (SELECT MAX(ID_USER) FROM users));
 -- #data bank
 INSERT INTO bank (ID_Bank, Bank_Name) VALUES
 (1, 'Bank Aceh'),
@@ -276,22 +265,22 @@ SELECT setval('module_id_module_seq', (SELECT MAX(ID_Module) FROM module));
 
 
 -- #DATA OPERATOR
-INSERT INTO OPERATOR (ID_OPERATOR, NAME, USERNAME, PASSWORD)
-VALUES (1, 'OPERATOR1', 'optr1', '12345678');
-INSERT INTO OPERATOR (ID_OPERATOR, NAME, USERNAME, PASSWORD)
-VALUES (2, 'OPERATOR2', 'optr2', '12345678');
-INSERT INTO OPERATOR (ID_OPERATOR, NAME, USERNAME, PASSWORD)
-VALUES (3, 'OPERATOR3', 'optr3', '12345678');
+INSERT INTO OPERATOR (ID_OPERATOR, NAME, USERNAME, PASSWORD, ID_DIVISI, ID_DEPARTMENT)
+VALUES (1, 'OPERATOR1', 'optr1', '12345678', 1, 1);
+INSERT INTO OPERATOR (ID_OPERATOR, NAME, USERNAME, PASSWORD, ID_DIVISI, ID_DEPARTMENT)
+VALUES (2, 'OPERATOR2', 'optr2', '12345678', 2, 2);
+INSERT INTO OPERATOR (ID_OPERATOR, NAME, USERNAME, PASSWORD, ID_DIVISI, ID_DEPARTMENT)
+VALUES (3, 'OPERATOR3', 'optr3', '12345678', 3, 3);
 SELECT setval('operator_id_operator_seq', (SELECT MAX(ID_OPERATOR) FROM OPERATOR));
 
 
 -- #DATA SUPERVISOR
-INSERT INTO SUPERVISOR (ID_SUPERVISOR, NAME, USERNAME, PASSWORD)
-VALUES (1, 'SUPERVISOR1', 'spv1', '12345678');
-INSERT INTO SUPERVISOR (ID_SUPERVISOR, NAME, USERNAME, PASSWORD)
-VALUES (2, 'SUPERVISOR2', 'spv2', '12345678');
-INSERT INTO SUPERVISOR (ID_SUPERVISOR, NAME, USERNAME, PASSWORD)
-VALUES (3, 'SUPERVISOR3', 'spv3', '12345678');
+INSERT INTO SUPERVISOR (ID_SUPERVISOR, NAME, USERNAME, PASSWORD, ID_DIVISI, ID_DEPARTMENT)
+VALUES (1, 'SUPERVISOR1', 'spv1', '12345678', 1, 1);
+INSERT INTO SUPERVISOR (ID_SUPERVISOR, NAME, USERNAME, PASSWORD, ID_DIVISI, ID_DEPARTMENT)
+VALUES (2, 'SUPERVISOR2', 'spv2', '12345678', 2, 2);
+INSERT INTO SUPERVISOR (ID_SUPERVISOR, NAME, USERNAME, PASSWORD, ID_DIVISI, ID_DEPARTMENT)
+VALUES (3, 'SUPERVISOR3', 'spv3', '12345678', 3, 3);
 SELECT setval('supervisor_id_supervisor_seq', (SELECT MAX(ID_SUPERVISOR) FROM SUPERVISOR));
 
 

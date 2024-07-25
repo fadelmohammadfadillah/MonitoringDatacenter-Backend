@@ -9,10 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.collega.otomasi_datacenter.model.Department;
 import com.collega.otomasi_datacenter.model.Divisi;
-import com.collega.otomasi_datacenter.model.UserDivisi;
 import com.collega.otomasi_datacenter.repository.DepartmentRepository;
 import com.collega.otomasi_datacenter.repository.DivisiRepository;
-import com.collega.otomasi_datacenter.repository.UserDivRepository;
 
 @Service
 public class DivisiService {
@@ -23,8 +21,6 @@ public class DivisiService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
-    @Autowired
-    private UserDivRepository userDivRepository;
 
     public String createDivisi(Divisi request){
         try {
@@ -84,9 +80,6 @@ public class DivisiService {
         return divisiRepository.findAll();
     }
 
-    public List<UserDivisi> getAllUserDivisi(){
-        return userDivRepository.findAll();
-    }
 }
 
 

@@ -7,34 +7,25 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import com.collega.otomasi_datacenter.model.Manager;
-import com.collega.otomasi_datacenter.model.Operator;
 import com.collega.otomasi_datacenter.model.SuperAdmin;
 import com.collega.otomasi_datacenter.model.Supervisor;
-import com.collega.otomasi_datacenter.model.UserDepartment;
-import com.collega.otomasi_datacenter.model.UserDivisi;
-import com.collega.otomasi_datacenter.repository.ManagerRepository;
-import com.collega.otomasi_datacenter.repository.OperatorRepository;
+import com.collega.otomasi_datacenter.model.Operator;
+import com.collega.otomasi_datacenter.model.ProductOwner;
 import com.collega.otomasi_datacenter.repository.SuperAdminRepository;
 import com.collega.otomasi_datacenter.repository.SupervisorRepository;
-import com.collega.otomasi_datacenter.repository.UserDeptRepository;
-import com.collega.otomasi_datacenter.repository.UserDivRepository;
+import com.collega.otomasi_datacenter.repository.OperatorRepository;
+import com.collega.otomasi_datacenter.repository.ProductOwnerRepository;
 
 @Service
 public class CustomUserDetailService implements UserDetailsService {
     @Autowired
     private SuperAdminRepository superAdminRepository;
     @Autowired
-    private OperatorRepository operatorRepository;
-    @Autowired
-    private ManagerRepository managerRepository;
+    private ProductOwnerRepository productOwnerRepository;
     @Autowired
     private SupervisorRepository supervisorRepository;
     @Autowired
-    private UserDeptRepository userDeptRepository;
-    @Autowired
-    private UserDivRepository userDivRepository;
+    private OperatorRepository operatorRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -43,30 +34,21 @@ public class CustomUserDetailService implements UserDetailsService {
             return superAdmin.get();
         }
 
-        Optional<Operator> operator = Optional.ofNullable(operatorRepository.findByUsername(username));
-        if(operator.isPresent()){
-            return operator.get();
-        }
-
-        Optional<Manager> manager = Optional.ofNullable(managerRepository.findByUsername(username));
-        if(manager.isPresent()){
-            return manager.get();
+        Optional<ProductOwner> productOwner = Optional.ofNullable(productOwnerRepository.findByUsername(username));
+        if(productOwner.isPresent()){
+            return productOwner.get();
         }
 
         Optional<Supervisor> supervisor = Optional.ofNullable(supervisorRepository.findByUsername(username));
         if(supervisor.isPresent()){
             return supervisor.get();
         }
-
-        Optional<UserDepartment> userDept = Optional.ofNullable(userDeptRepository.findByUsername(username));
-        if(userDept.isPresent()){
-            return userDept.get();
+        
+        Optional<Operator> operator = Optional.ofNullable(operatorRepository.findByUsername(username));
+        if(operator.isPresent()){
+            return operator.get();
         }
 
-        Optional<UserDivisi> userDiv = Optional.ofNullable(userDivRepository.findByUsername(username));
-        if(userDiv.isPresent()){
-            return userDiv.get();
-        }
         throw new UsernameNotFoundException("User not found !");
     }
     

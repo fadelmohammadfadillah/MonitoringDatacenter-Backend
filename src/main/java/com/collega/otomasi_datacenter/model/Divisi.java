@@ -1,7 +1,6 @@
 package com.collega.otomasi_datacenter.model;
 
 import java.util.Set;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,7 +30,7 @@ public class Divisi {
     private String divisiName;
     
     @OneToMany(mappedBy = "idDivisi", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<UserDivisi> userDivisi;
+    private Set<ProductOwner> productOwners;
 
     @OneToMany(mappedBy = "idDivisi", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Department> departments;
