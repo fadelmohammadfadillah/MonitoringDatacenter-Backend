@@ -49,12 +49,12 @@ INSERT INTO department (ID_Department, Department_Name, ID_DIVISI) VALUES
 SELECT setval('department_id_department_seq', (SELECT MAX(ID_Department) FROM department));
 
 -- #DATA PO DEPARTMENT
-INSERT INTO product_owner (ID_PO, NAME, USERNAME, PASSWORD, ID_DIVISI, ID_DEPARTMENT) VALUES
-(1, 'PO DEPT CDT', 'podeptcdt', '12345678', 1, 1);
+INSERT INTO product_owner (ID_PO, NAME, USERNAME, PASSWORD, ROLE, ID_DIVISI, ID_DEPARTMENT) VALUES
+(1, 'PO DEPT CDT', 'podeptcdt', '12345678', 'PO_DEPARTMENT', 1, 1);
 -- #DATA PO DIVISI
-INSERT INTO product_owner (ID_PO, NAME, USERNAME, PASSWORD, ID_DIVISI) VALUES
-(2, 'PO DIV DE', 'podivde', '12345678', 2);
-SELECT setval('product_owner_id_po_seq', (SELECT MAX(ID_USER) FROM users));
+INSERT INTO product_owner (ID_PO, NAME, USERNAME, PASSWORD, ROLE, ID_DIVISI) VALUES
+(2, 'PO DIV DE', 'podivde', '12345678', 'PO_DIVISI', 2);
+SELECT setval('product_owner_id_po_seq', (SELECT MAX(id_po) FROM product_owner));
 -- #data bank
 INSERT INTO bank (ID_Bank, Bank_Name) VALUES
 (1, 'Bank Aceh'),

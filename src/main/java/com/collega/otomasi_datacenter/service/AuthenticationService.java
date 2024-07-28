@@ -69,12 +69,12 @@ public class AuthenticationService {
             Department department = departmentRepository.findById(request.getIdDepartment())
                 .orElseThrow(() -> new RuntimeException("Data department tidak tersedia!"));
             var operator = Operator.builder()
+                .idDepartment(department)
                 .idDivisi(divisi)
                 .name(request.getName())
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
-            operator.setIdDepartment(department);
             operatorRepository.save(operator);
             return "Registrasi operator berhasil!";
         } catch (DataIntegrityViolationException e) {
@@ -91,12 +91,12 @@ public class AuthenticationService {
             Department department = departmentRepository.findById(request.getIdDepartment())
                 .orElseThrow(() -> new RuntimeException("Data department tidak tersedia!"));
             var supervisor = Supervisor.builder()
+                .idDepartment(department)
                 .idDivisi(divisi)
                 .name(request.getName())
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
-            supervisor.setIdDepartment(department);
             supervisorRepository.save(supervisor);
             return "Registrasi supervisor berhasil!";
         } catch (DataIntegrityViolationException e) {
