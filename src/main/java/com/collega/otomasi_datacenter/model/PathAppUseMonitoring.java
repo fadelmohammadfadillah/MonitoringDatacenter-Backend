@@ -40,4 +40,10 @@ public class PathAppUseMonitoring {
 
     @Column(name = "usage")
     private Integer usage;
+
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "operator_notes")
+    private String operatorNotes;
 }

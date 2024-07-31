@@ -29,11 +29,6 @@ public class ModuleMonitoring {
     private Integer idModuleMon;
 
     @ManyToOne
-    @JoinColumn(name = "id_subproduct")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Subproduct idSubproduct;
-
-    @ManyToOne
     @JoinColumn(name = "id_module")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Module idModule;

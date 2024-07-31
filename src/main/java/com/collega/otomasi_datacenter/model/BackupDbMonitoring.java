@@ -1,5 +1,7 @@
 package com.collega.otomasi_datacenter.model;
 
+import java.time.LocalTime;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -44,7 +46,10 @@ public class BackupDbMonitoring {
     @Column(name = "operator_notes")
     private String operatorNotes;
 
-    @Column(name = "log")
-    private String log;
+    @Column(name= "start_backup")
+    private LocalTime startBackup;
+
+    @Column(name= "finish_backup")
+    private LocalTime finishBackup;
 
 }

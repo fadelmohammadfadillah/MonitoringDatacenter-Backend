@@ -1,10 +1,12 @@
 package com.collega.otomasi_datacenter.model;
 
-import java.sql.Date;
 import java.sql.Time;
+import java.util.Date;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -45,6 +47,7 @@ public class EventMonitoring {
     private String operatorNotes;
 
     @Column(name = "date_mon")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date dateMon;
 
     @Column(name = "time_mon")

@@ -41,4 +41,10 @@ public class PathDbUseMonitoring {
 
     @Column(name = "usage")
     private Integer usage;
+
+    @Column(name="operator_notes")
+    private String operatorNotes;
+
+    @Column(name="status")
+    private String status;
 }
