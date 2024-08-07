@@ -2,6 +2,7 @@ package com.collega.otomasi_datacenter.model;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,17 +21,29 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "server_app_path")
-public class ServerAppPath {
+@Table(name = "server_path_monitoring")
+public class ServerPathMonitoring {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_server_app_path")
-    private Integer idServerAppPath;
+    @Column(name = "id_server_path_mon")
+    private Integer idServerPathMon;
 
     @ManyToOne
-    @JoinColumn(name = "id_server_app")
+    @JoinColumn(name = "id_dtl_mon")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private ServerApp idServerApp;
+    private DetailMonitoring idDetailMonitoring;
 
-    private String path;
+    @ManyToOne
+    @JoinColumn(name = "id_server_path")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private ServerPath idServerPath;
+
+    @Column(name = "usage")
+    private Integer usage;
+
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "operator_notes")
+    private String operatorNotes;
 }

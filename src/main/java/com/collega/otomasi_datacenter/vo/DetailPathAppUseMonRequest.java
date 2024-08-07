@@ -1,6 +1,5 @@
 package com.collega.otomasi_datacenter.vo;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,8 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventMonitoringRequest {
-    private String bankName;
-    private String dateMon;
-    private List<EventDetailRequest> details;
+public class DetailPathAppUseMonRequest {
+    private Integer idPathAppUseMon;
+    private String path;
+    private Integer usage;
+    private String operatorNotes;
+    private String status;
 }

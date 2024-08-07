@@ -16,13 +16,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "server_db")
-public class ServerDb {
+@Table(name = "server")
+public class Server {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_server_db")
-    private Integer idServerDb;
-    
-    @Column(name = "ip_address", unique = true)
+    @Column(name = "id_server")
+    private Integer idServer;
+
+    @Column(name = "ip_address", unique = true, nullable = false)
     private String ipAddress;
+
+    @Column(name = "server_type", nullable = false)
+    private String serverType;
 }

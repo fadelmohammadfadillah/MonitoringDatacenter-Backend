@@ -40,14 +40,14 @@ public class EventMonitoringController {
         }
     }
 
-    @GetMapping("/api/supervisor/em/{id}/path-app-use-monitoring")
-    public ResponseEntity<?> getPathAppUseMonByIdMon(@PathVariable Integer id) {
-        try {
-            return ResponseEntity.ok(eventMonitoringService.getAllPathAppUseMonByIdMon(id));
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(401).body(new ErrorResponse(e.getMessage()));
-        }
-    }    
+    // @GetMapping("/api/supervisor/em/{id}/path-app-use-monitoring")
+    // public ResponseEntity<?> getPathAppUseMonByIdMon(@PathVariable Integer id) {
+    //     try {
+    //         return ResponseEntity.ok(eventMonitoringService.getAllPathAppUseMonByIdMon(id));
+    //     } catch (RuntimeException e) {
+    //         return ResponseEntity.status(401).body(new ErrorResponse(e.getMessage()));
+    //     }
+    // }    
     
     @GetMapping("/api/supervisor/em/{id}/path-db-use-monitoring")
     public ResponseEntity<?> getPathDbUseMonByIdMon(@PathVariable Integer id) {

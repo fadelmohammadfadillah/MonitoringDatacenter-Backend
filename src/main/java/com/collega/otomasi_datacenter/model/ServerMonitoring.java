@@ -1,7 +1,5 @@
 package com.collega.otomasi_datacenter.model;
 
-import java.sql.Time;
-
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -23,32 +21,35 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "backup_app_monitoring")
-public class BackupAppMonitoring {
+@Table(name = "server_monitoring")
+public class ServerMonitoring {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_backup_app_mon")
-    private Integer idBackupAppMon;
-
+    @Column(name = "id_server_mon")
+    private Integer idServerMon;
+    
     @ManyToOne
-    @JoinColumn(name = "id_backup_app")
+    @JoinColumn(name = "id_server")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private BackupApp idBackupApp;
+    private Server idServer;
 
     @ManyToOne
     @JoinColumn(name = "id_dtl_mon")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private DetailMonitoring idDetailMonitoring;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "cpu_usage")
+    private Integer cpuUsage;
+
+    @Column(name = "ram_usage")
+    private Integer ramUsage;
+
+    @Column(name = "disk_usage")
+    private Integer diskUsage;
 
     @Column(name = "operator_notes")
     private String operatorNotes;
-    
-    @Column(name= "start_backup")
-    private Time startBackup;
 
-    @Column(name= "finish_backup")
-    private Time finishBackup;
+    @Column(name = "log")
+    private String log;
 }

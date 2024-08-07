@@ -1,7 +1,6 @@
 package com.collega.otomasi_datacenter.vo;
 
-import java.time.LocalTime;
-import java.util.Date;
+import java.sql.Time;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class EventDetailRequest {
     private Integer idMonitoring;
     private String operatorName;
-    private Date dateMon;
-    private LocalTime timeMon;
+    private String dateMon;
+    private Time timeMon;
     private String approvalStatus;
 }

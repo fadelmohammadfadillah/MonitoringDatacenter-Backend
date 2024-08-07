@@ -1,7 +1,9 @@
 package com.collega.otomasi_datacenter.model;
 
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,17 +22,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "backup_db")
-public class BackupDb {
+@Table(name = "server_backup")
+public class ServerBackup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_backup_db")
-    private Integer idBackupDb;
+    @Column(name = "id_server_backup")
+    private Integer idServerBackup;
 
     @ManyToOne
-    @JoinColumn(name = "id_server_db")
+    @JoinColumn(name = "id_server")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private ServerDb idServerDb;
+    private Server idServer;
 
     private String directory;
 }

@@ -1,6 +1,5 @@
 package com.collega.otomasi_datacenter.model;
 
-
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -22,17 +21,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "backup_app")
-public class BackupApp {
+@Table(name = "server_config")
+public class ServerConfig {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_backup_app")
-    private Integer idBackupApp;
+    @Column(name = "id_server_config")
+    private Integer idServerSubProductConfig;
 
     @ManyToOne
-    @JoinColumn(name = "id_server_app")
+    @JoinColumn(name = "id_server", nullable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private ServerApp idServerApp;
+    private Server idServer;
 
-    private String directory;
+    @ManyToOne
+    @JoinColumn(name = "id_server_port")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private ServerPort idServerPort;
+
+    @ManyToOne
+    @JoinColumn(name = "id_subproduct")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Subproduct idSubproduct;
 }

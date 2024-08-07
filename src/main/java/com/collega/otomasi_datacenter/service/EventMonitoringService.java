@@ -1,7 +1,7 @@
 package com.collega.otomasi_datacenter.service;
 
 import java.sql.Time;
-import java.time.LocalTime;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,7 +16,6 @@ import com.collega.otomasi_datacenter.vo.BackupServerRequest;
 import com.collega.otomasi_datacenter.vo.EventDetailRequest;
 import com.collega.otomasi_datacenter.vo.EventMonitoringRequest;
 import com.collega.otomasi_datacenter.vo.ModuleMonitoringRequest;
-import com.collega.otomasi_datacenter.vo.PathAppUseMonRequest;
 import com.collega.otomasi_datacenter.vo.PathDbUseMonRequest;
 import com.collega.otomasi_datacenter.vo.ServerMonitoringRequest;
 
@@ -28,32 +27,38 @@ public class EventMonitoringService {
     public List<EventMonitoringRequest> getAllEventMonitoring(){
         List<Object[]> results = detailMonitoringRepository.findAllDtlMon();
         Map<String, EventMonitoringRequest> emRequestMap = new HashMap<>();
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+
         for (Object[] result : results){
             Integer idMonitoring = (Integer) result[0];
             String bankName = (String) result[1];
             Date dateMon = (Date) result[2];
-            LocalTime timeMon = (LocalTime) result[3];
+            Time timeMon = (Time) result[3];
             String operatorName = (String) result[4];
             String approvalStatus = (String) result[5];
+
+            String formattedDate = dateFormat.format(dateMon);
+
             EventDetailRequest detail = EventDetailRequest.builder()
                                         .idMonitoring(idMonitoring)
                                         .operatorName(operatorName)
-                                        .dateMon(dateMon)
+                                        .dateMon(formattedDate)
                                         .timeMon(timeMon)
                                         .approvalStatus(approvalStatus)
                                         .build();
             String key = bankName + dateMon.toString();
-            System.out.println(key);
+            
             if (!emRequestMap.containsKey(key)){
                 EventMonitoringRequest emRequest = EventMonitoringRequest.builder()
                                                 .bankName(bankName)
-                                                .dateMon(dateMon)
-                                                .detail(new ArrayList<>())
+                                                .dateMon(formattedDate)
+                                                .details(new ArrayList<>())
                                                 .build();
                 emRequestMap.put(key, emRequest);
             }
 
-            emRequestMap.get(key).getDetail().add(detail);            
+            emRequestMap.get(key).getDetails().add(detail);            
         }
         return new ArrayList<>(emRequestMap.values());
     }
@@ -74,22 +79,54 @@ public class EventMonitoringService {
         .collect(Collectors.toList());
     }
 
-    public List<PathAppUseMonRequest> getAllPathAppUseMonByIdMon(Integer idMonitoring){
-        List<Object[]> results = detailMonitoringRepository.findAllPathAppUseMonByIdMon(idMonitoring);
-        return results.stream().map(result -> {
-            PathAppUseMonRequest pathAppUseMonRequest = PathAppUseMonRequest.builder()
-                                        .idPathAppUseMon((Integer) result[0])
-                                        .subproductName((String) result[1])
-                                        .ipAddress((String) result[2])
-                                        .path((String) result[3])
-                                        .usage((Integer) result[4])
-                                        .operatorNotes((String) result[5])
-                                        .status((String) result[6])
-                                        .build();
-            return pathAppUseMonRequest;
-        })
-        .collect(Collectors.toList());
-    }
+    // public List<PathAppUseMonRequest> getAllPathAppUseMonByIdMon(Integer idMonitoring){
+    //     List<Object[]> results = detailMonitoringRepository.findAllPathAppUseMonByIdMon(idMonitoring);
+    //     Map<String, PathAppUseMonRequest> pathMonRequestMap = new HashMap<>();
+
+    //     for (Object[] result : results){
+    //         Integer idPathAppUseMon = (Integer) result[0];
+    //         String subproductName = (String) result[1];
+    //         String ipAddress = (String) result[2];
+    //         String path = (String) result[3];
+    //         Integer usage = (Integer) result[4];
+    //         String operatorNotes = (String) result[5];
+    //         String status = (String) result[6];
+
+    //         DetailPathAppUseMonRequest detail = DetailPathAppUseMonRequest.builder()
+    //                                     .idPathAppUseMon(idPathAppUseMon)
+    //                                     .path(path)
+    //                                     .status(status)
+    //                                     .usage(usage)
+    //                                     .operatorNotes(operatorNotes)
+    //                                     .build();
+    //         String key = ipAddress;
+            
+    //     //     if (!pathMonRequestMap.containsKey(key)){
+    //     //         EventMonitoringRequest emRequest = EventMonitoringRequest.builder()
+    //     //                                         .bankName(bankName)
+    //     //                                         .dateMon(formattedDate)
+    //     //                                         .details(new ArrayList<>())
+    //     //                                         .build();
+    //     //         pathMonRequestMap.put(key, emRequest);
+    //     //     }
+
+    //     //     pathMonRequestMap.get(key).getDetails().add(detail);            
+    //     }
+
+    //     // return results.stream().map(result -> {
+    //     //     PathAppUseMonRequest pathAppUseMonRequest = PathAppUseMonRequest.builder()
+    //     //                                 .idPathAppUseMon((Integer) result[0])
+    //     //                                 .subproductName((String) result[1])
+    //     //                                 .ipAddress((String) result[2])
+    //     //                                 .path((String) result[3])
+    //     //                                 .usage((Integer) result[4])
+    //     //                                 .operatorNotes((String) result[5])
+    //     //                                 .status((String) result[6])
+    //     //                                 .build();
+    //     //     return pathAppUseMonRequest;
+    //     // })
+    //     // .collect(Collectors.toList());
+    // }
 
     public List<PathDbUseMonRequest> getAllPathDbUseMonByIdMon(Integer idMonitoring){
         List<Object[]> results = detailMonitoringRepository.findAllPathDbUseMonByIdMon(idMonitoring);
